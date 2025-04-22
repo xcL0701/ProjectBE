@@ -7,7 +7,7 @@ RUN apk update && apk upgrade
 RUN apk add --no-cache icu-dev zip libzip-dev
 
 RUN apk add --no-cache libpng-dev
-RUN apk add --no-cache libjpeg-turbo-dev # Kembali mencoba ini
+RUN apk add --no-cache libjpeg-turbo-dev
 RUN apk add --no-cache libwebp-dev
 RUN apk add --no-cache freetype-dev
 RUN apk add --no-cache mysql-client
@@ -27,6 +27,9 @@ WORKDIR /var/www/html
 
 # Salin kode aplikasi
 COPY . /var/www/html
+
+# Debugging: Lihat isi /var/www/html
+RUN ls -al /var/www/html
 
 # Install dependency Composer
 RUN composer install --no-dev --optimize-autoloader
