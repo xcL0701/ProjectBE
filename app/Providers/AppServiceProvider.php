@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
         if (env('APP_ENV') === 'production') {
             URL::forceScheme('https');
         }
-
+        $this->app->bind(LoginResponseContract::class, LoginResponse::class);
         // ... misal observer kamu di bawahnya
         Payment::observe(PaymentObserver::class);
     }

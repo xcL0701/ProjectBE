@@ -3,7 +3,7 @@
 use Laravel\Sanctum\Sanctum;
 
 return [
-
+    'domain' => env('SESSION_DOMAIN', null),
     /*
     |--------------------------------------------------------------------------
     | Stateful Domains
