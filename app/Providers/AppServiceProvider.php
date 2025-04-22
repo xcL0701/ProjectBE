@@ -21,12 +21,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Force https di production
-        if ($this->app->environment('production')) {
+        if (env('APP_ENV') === 'production') {
             URL::forceScheme('https');
         }
 
-        // Observe model Payment
+        // ... misal observer kamu di bawahnya
         Payment::observe(PaymentObserver::class);
     }
 }
