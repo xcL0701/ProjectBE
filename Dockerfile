@@ -4,7 +4,7 @@ RUN rm -rf /var/cache/apk/*
 RUN apk update && apk upgrade
 
 RUN apk add --no-cache libpng-dev
-RUN apk add --no-cache libjpeg-dev
+RUN apk add --no-cache libjpeg-turbo-dev
 RUN apk add --no-cache libwebp-dev
 RUN apk add --no-cache freetype-dev
 RUN apk add --no-cache mysql-client
