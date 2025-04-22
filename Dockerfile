@@ -25,8 +25,11 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Set working directory
 WORKDIR /var/www/html
 
-# Salin kode aplikasi
-COPY . /var/www/html
+# Salin file .env secara eksplisit
+COPY .env .env
+
+# Salin kode aplikasi lainnya
+COPY . .
 
 # Debugging: Lihat isi /var/www/html
 RUN ls -al /var/www/html
