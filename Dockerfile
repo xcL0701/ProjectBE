@@ -6,7 +6,7 @@ RUN apk add --no-cache libpng-dev
 RUN apk add --no-cache libjpeg-turbo-dev
 RUN apk add --no-cache libwebp-dev
 RUN apk add --no-cache freetype-dev
-RUN apk add --no-cache libmariadb-dev
+RUN apk add --no-cache mysql-client
 
 # Konfigurasi dan instal ekstensi gd
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp
