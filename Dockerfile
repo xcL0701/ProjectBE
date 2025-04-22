@@ -1,11 +1,12 @@
 FROM php:8.2-fpm-alpine
 
-# Update dan upgrade paket
 RUN apk update && apk upgrade
 
-# Install library sistem yang dibutuhkan untuk ekstensi gd dan pdo_mysql
-RUN apk add --no-cache libpng-dev libjpeg-turbo-dev libwebp-dev freetype-dev \
-    libmariadb-dev
+RUN apk add --no-cache libpng-dev
+RUN apk add --no-cache libjpeg-turbo-dev
+RUN apk add --no-cache libwebp-dev
+RUN apk add --no-cache freetype-dev
+RUN apk add --no-cache libmariadb-dev
 
 # Konfigurasi dan instal ekstensi gd
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp
