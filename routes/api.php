@@ -57,3 +57,11 @@ Route::middleware(['api_key', 'auth:sanctum'])->group(function () {
 Route::get('/products/like-test', function () {
     return 'OK';
 });
+
+Route::get('/check-auth', function () {
+    return [
+        'auth' => Auth::check(),
+        'user' => Auth::user(),
+        'session' => session()->all(),
+    ];
+})->middleware('web');
