@@ -1,19 +1,17 @@
 FROM php:8.2-fpm-alpine
 
+RUN rm -rf /var/cache/apk/*
 RUN apk update && apk upgrade
 
-RUN apk add --no-cache libpng-dev
-RUN apk add --no-cache libjpeg-turbo-dev
-RUN apk add --no-cache libwebp-dev
-RUN apk add --no-cache freetype-dev
-RUN apk add --no-cache mysql-client
+RUN apk add --no-cache libpng-dev libjpeg-dev libwebp-dev freetype-dev \
+    mysql-client
+
+# Instal ekstensi PHP yang dibutuhkan
+RUN docker-php-ext-install -j$(nproc) intl zip
 
 # Konfigurasi dan instal ekstensi gd
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp
-RUN docker-php-ext-install -j$(nproc) gd
-
-# Instal ekstensi pdo dan pdo_mysql
-RUN docker-php-ext-install -j$(nproc) pdo pdo_mysql
+RUN docker-php-ext-install -j$(nproc) gd pdo pdo_mysql
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
