@@ -14,7 +14,9 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'api_key' =>\App\Http\Middleware\CheckApiKey::class,
-            $middleware->append(\Illuminate\Http\Middleware\HandleCors::class)
+            $middleware
+                ->append(\Illuminate\Http\Middleware\HandleCors::class)
+                ->trustProxies(at: '*')
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
