@@ -3,8 +3,11 @@ FROM php:8.2-fpm-alpine
 RUN rm -rf /var/cache/apk/*
 RUN apk update && apk upgrade
 
+# Install library sistem yang dibutuhkan untuk ekstensi intl dan zip
+RUN apk add --no-cache icu-dev zip libzip-dev
+
 RUN apk add --no-cache libpng-dev
-RUN apk add --no-cache libjpeg-turbo-dev
+RUN apk add --no-cache libjpeg-dev # Menggunakan libjpeg-dev
 RUN apk add --no-cache libwebp-dev
 RUN apk add --no-cache freetype-dev
 RUN apk add --no-cache mysql-client
