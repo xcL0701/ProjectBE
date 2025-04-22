@@ -1,0 +1,6 @@
+[build]
+builder = "heroku/buildpacks:20"
+
+[[build.env]]
+name = "PHP_VERSION"
+value = "8.3"
