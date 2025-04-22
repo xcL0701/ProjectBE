@@ -7,7 +7,7 @@ RUN apk update && apk upgrade
 RUN apk add --no-cache icu-dev zip libzip-dev
 
 RUN apk add --no-cache libpng-dev
-RUN apk add --no-cache libjpeg-dev # Menggunakan libjpeg-dev
+RUN apk add --no-cache libjpeg-turbo-dev # Kembali mencoba ini
 RUN apk add --no-cache libwebp-dev
 RUN apk add --no-cache freetype-dev
 RUN apk add --no-cache mysql-client
