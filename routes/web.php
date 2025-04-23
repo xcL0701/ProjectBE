@@ -34,8 +34,5 @@ Route::middleware('cors')->get('/storage/models/{filename}', function ($filename
 
     return response()->file($path, [
         'Content-Type' => 'model/gltf-binary',
-        'Access-Control-Allow-Origin' => 'https://ptcsi.vercel.app',
-        'Access-Control-Allow-Methods' => 'GET, OPTIONS',
-        'Access-Control-Allow-Headers' => 'Origin, Content-Type, Accept',
     ]);
 });
