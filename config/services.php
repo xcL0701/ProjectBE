@@ -25,7 +25,7 @@ return [
     ],
 
     'wablas' => [
-        'token' => env('WABLAS_TOKEN'),
+        'token' => env('WABLAS_API_KEY'),
         'api_key' => env('WABLAS_API_KEY'),
         'url' => env('WABLAS_URL'),
     ],
