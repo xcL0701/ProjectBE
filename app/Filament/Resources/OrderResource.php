@@ -223,7 +223,7 @@ class OrderResource extends Resource
                     ]),
                 TextColumn::make('link.token')
                     ->label('Link Konfirmasi')
-                    ->formatStateUsing(fn ($state) => config('app.url') . "/payment/confirmation/{$state}")
+                    ->formatStateUsing(fn ($state) => "ptcsi.vercel.app/payment/confirmation/{$state}")
                     ->copyable()
                     ->copyMessage('Link berhasil disalin')
                     ->copyMessageDuration(1500)
