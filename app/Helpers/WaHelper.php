@@ -10,7 +10,7 @@ class WaHelper
         $response = Http::withHeaders([
             'Authorization' => config('services.wablas.token'),
         ])->post(config('services.wablas.url'), [
-            'phone' => $phone, // pastikan formatnya 628xxxx
+            'phone' => $phone,
             'message' => $message,
             'isGroup' => false,
         ]);
