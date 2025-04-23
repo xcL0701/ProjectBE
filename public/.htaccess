@@ -1,11 +1,3 @@
-<IfModule mod_headers.c>
-    <FilesMatch "\.(glb|gltf|json|jpg|jpeg|png|gif|svg|webp|woff2?|ttf|otf|js|css|mp4|webm)$">
-        Header always set Access-Control-Allow-Origin "https://ptcsi.vercel.app"
-        Header always set Access-Control-Allow-Methods "GET, OPTIONS"
-        Header always set Access-Control-Allow-Headers "Origin, Content-Type, Accept"
-    </FilesMatch>
-</IfModule>
-
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
