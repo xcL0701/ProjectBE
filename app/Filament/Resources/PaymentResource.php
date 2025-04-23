@@ -76,15 +76,21 @@ class PaymentResource extends Resource
                         $record->status = 'approved';
                         $record->save();
                         // Kirim WA kalau approved
-                        Http::withHeaders([
-                            'Authorization' => env('WABLAS_API_KEY'),
-                            'Content-Type' => 'application/json',
-                        ])->post(env('WABLAS_URL'), [
-                            'data' => [[
-                                'phone' => $record->order->user->phone,
-                                'message' => "✅ Pembayaran untuk Order ID: {$record->order_id} sebesar Rp" . number_format($record->amount) . " telah *DITERIMA*. Terima kasih 🙏",
-                            ]],
-                        ]);
+                        try {
+                            $response = Http::withHeaders([
+                                'Authorization' => env('WABLAS_API_KEY'),
+                                'Content-Type' => 'application/json',
+                            ])->post(env('WABLAS_URL'), [
+                                'data' => [[
+                                    'phone' => $record->order->user->phone,
+                                    'message' => "✅ Pembayaran untuk Order ID: {$record->order_id} sebesar Rp" . number_format($record->amount) . " telah *DITERIMA*. Terima kasih 🙏",
+                                ]],
+                            ]);
+
+                            Log::info('Wablas response:', $response->json());
+                        } catch (\Exception $e) {
+                            Log::error('Wablas error:', ['message' => $e->getMessage()]);
+                        }
                     }),
 
                 Action::make('reject')
