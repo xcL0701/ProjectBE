@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 
 Route::get('/', function () {
     return view('welcome');
@@ -21,4 +23,19 @@ Route::get('/tes-wa', function () {
     ]);
 
     dd($response->body());
+});
+
+Route::middleware('cors')->get('/storage/models/{filename}', function ($filename) {
+    $path = storage_path('app/public/models/' . $filename);
+
+    if (!file_exists($path)) {
+        abort(404);
+    }
+
+    return response()->file($path, [
+        'Content-Type' => 'model/gltf-binary',
+        'Access-Control-Allow-Origin' => 'https://ptcsi.vercel.app',
+        'Access-Control-Allow-Methods' => 'GET, OPTIONS',
+        'Access-Control-Allow-Headers' => 'Origin, Content-Type, Accept',
+    ]);
 });
