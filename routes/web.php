@@ -25,14 +25,17 @@ Route::get('/tes-wa', function () {
     dd($response->body());
 });
 
-Route::middleware('cors')->get('/storage/models/{filename}', function ($filename) {
+Route::get('/storage/models/{filename}', function ($filename) {
     $path = storage_path('app/public/models/' . $filename);
 
     if (!file_exists($path)) {
         abort(404);
     }
 
-    return response()->file($path, [
-        'Content-Type' => 'model/gltf-binary',
-    ]);
+    $file = file_get_contents($path);
+    return response($file, 200)
+        ->header('Content-Type', mime_content_type($path))
+        ->header('Access-Control-Allow-Origin', 'https://ptcsi.vercel.app')
+        ->header('Access-Control-Allow-Methods', 'GET, OPTIONS')
+        ->header('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept');
 });
