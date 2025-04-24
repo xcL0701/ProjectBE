@@ -41,4 +41,13 @@ class CreateOrder extends CreateRecord
             Cart::where('user_id', $this->record->user_id)->delete();
         }
     }
+    public function getTitle(): string
+    {
+        return 'Tambah Pesanan Baru';
+    }
+
+    public function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }

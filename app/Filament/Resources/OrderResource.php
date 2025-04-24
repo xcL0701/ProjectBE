@@ -31,7 +31,8 @@ use Illuminate\Support\Str;
 class OrderResource extends Resource
 {
     protected static ?string $model = Order::class;
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationLabel = 'Pesanan';
+    protected static ?string $navigationIcon = 'heroicon-o-document-text';
     protected static ?string $navigationGroup = 'Transaksi';
 
     public static function form(Form $form): Form
@@ -206,12 +207,12 @@ class OrderResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user.name')->label('User'),
+                Tables\Columns\TextColumn::make('user.name')->label('User')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('shipping_method'),
                 Tables\Columns\TextColumn::make('total_price')->money('IDR'),
                 Tables\Columns\TextColumn::make('calculated_total_paid')->money('IDR'),
-                Tables\Columns\TextColumn::make('remaining_amount')->money('IDR')->label('Sisa'),
-                Tables\Columns\BadgeColumn::make('status')
+                Tables\Columns\TextColumn::make('remaining_amount')->sortable()->money('IDR')->label('Sisa'),
+                Tables\Columns\BadgeColumn::make('status')->sortable()->searchable()
                     ->formatStateUsing(fn (string $state): string => match ($state) {
                         'pending' => 'Belum Lunas',
                         'paid' => 'Lunas',

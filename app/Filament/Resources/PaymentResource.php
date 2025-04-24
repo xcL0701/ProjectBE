@@ -21,6 +21,7 @@ class PaymentResource extends Resource
 {
     protected static ?string $model = Payment::class;
     protected static ?string $navigationGroup = 'Transaksi';
+    protected static ?string $navigationLabel = 'Pembayaran';
     protected static ?string $navigationIcon = 'heroicon-o-credit-card';
 
     public static function form(Form $form): Form
@@ -43,10 +44,10 @@ class PaymentResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('order_id')->searchable(),
-                TextColumn::make('order.user.name')->label('User'),
+                TextColumn::make('order.user.name')->label('User')->sortable(),
                 TextColumn::make('amount')->money('IDR'),
-                TextColumn::make('created_at')->sortable()->label('Waktu Upload')->dateTime(),
-                BadgeColumn::make('status')
+                TextColumn::make('created_at')->sortable()->searchable()->label('Waktu Upload')->dateTime(),
+                BadgeColumn::make('status')->sortable()
                     ->colors([
                         'warning' => 'pending',
                         'success' => 'approved',

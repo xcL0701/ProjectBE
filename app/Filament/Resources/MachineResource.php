@@ -19,8 +19,9 @@ use Filament\Forms\Components\FileUpload;
 class MachineResource extends Resource
 {
     protected static ?string $model = Machine::class;
-
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationLabel = 'Kategori Mesin';
+    protected static ?string $navigationIcon = 'heroicon-o-cog-6-tooth';
+    protected static ?string $navigationGroup = 'Katalog';
 
     public static function form(Form $form): Form
     {
