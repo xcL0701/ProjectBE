@@ -25,8 +25,8 @@ Route::get('/tes-wa', function () {
     dd($response->body());
 });
 
-Route::get('/models/{filename}', function ($filename) {
-    $path = storage_path('app/public/models/' . $filename);
+Route::get('/storage/models/{filename}', function ($filename) {
+    $path = storage_path('app/public/storage/models' . $filename);
 
     if (!file_exists($path)) {
         abort(404);
