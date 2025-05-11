@@ -33,7 +33,11 @@ class ProductResource extends Resource
             ->schema([
                 TextInput::make('name')
                     ->label('Nama Barang')
-                    ->required(),
+                    ->required()
+                    ->unique(Product::class, 'name') // Tambahkan validasi unique
+                    ->validationMessages([
+                        'unique' => 'Nama produk ini sudah digunakan. Silakan gunakan nama lain.',
+                    ]),
                 Select::make('machine_id')
                     ->relationship('machine', 'name')
                     ->searchable()

@@ -29,7 +29,11 @@ class MachineResource extends Resource
             ->schema([
                 TextInput::make('name')
                     ->label('Nama Mesin')
-                    ->required(),
+                    ->required()
+                    ->unique(Machine::class, 'name') // Tambahkan validasi unique
+                    ->validationMessages([
+                        'unique' => 'Nama mesin ini sudah ada. Silakan gunakan nama lain.',
+                    ]),
                 FileUpload::make('photo')
                     ->label('Foto Mesin')
                     ->image()
