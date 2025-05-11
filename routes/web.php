@@ -26,7 +26,7 @@ Route::get('/tes-wa', function () {
 });
 
 Route::get('/storage/models/{filename}', function ($filename) {
-    $path = storage_path('app/public/storage/models' . $filename);
+    $path = storage_path('app/public/models/' . $filename);
 
     if (!file_exists($path)) {
         abort(404);
@@ -35,8 +35,7 @@ Route::get('/storage/models/{filename}', function ($filename) {
     $file = file_get_contents($path);
     return response($file, 200)
         ->header('Content-Type', mime_content_type($path))
-        ->header('Access-Control-Allow-Origin', '*') // sementara, bisa diganti spesifik domain
+        ->header('Access-Control-Allow-Origin', '*') // Sementara
         ->header('Access-Control-Allow-Methods', 'GET, OPTIONS')
         ->header('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept');
 });
-
