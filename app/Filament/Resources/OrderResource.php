@@ -98,7 +98,13 @@ class OrderResource extends Resource
                     'pickup' => 'Ambil di Tempat',
                     'delivery' => 'Diantar',
                 ])
-                ->disabled()
+                ->reactive()
+                ->afterStateUpdated(function (callable $set, $state) {
+                    if ($state === 'pickup') {
+                        $set('address', null);
+                        $set('shipping_cost', 0); // Optionally reset ongkir to 0
+                    }
+                })
                 ->dehydrated(true),
 
             Forms\Components\Hidden::make('cart_items')
@@ -111,7 +117,8 @@ class OrderResource extends Resource
 
             Forms\Components\Textarea::make('address')
                 ->label('Alamat')
-                ->rows(3),
+                ->rows(3)
+                ->disabled(fn (callable $get): bool => $get('shipping_method') === 'pickup'),
 
             Forms\Components\Textarea::make('note')
                 ->label('Catatan')
@@ -120,7 +127,9 @@ class OrderResource extends Resource
             Forms\Components\TextInput::make('shipping_cost')
                 ->label('Ongkir')
                 ->prefix('Rp')
-                ->numeric(),
+                ->numeric()
+                ->required()
+                ->disabled(fn (callable $get): bool => $get('shipping_method') === 'pickup'),
 
             Forms\Components\TextInput::make('initial_payment')
                 ->label('Total yang Harus Dibayar (DP)')
